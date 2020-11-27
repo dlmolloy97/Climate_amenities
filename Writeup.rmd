@@ -2,7 +2,7 @@
 title: "R Notebook"
 output: html_notebook
 ---
-After reading an artivle on the subjectivity of the USDA's rankings of American counties by scenery and climate, the author hypothesised that counties ranked lower on this scale would experience less severe impacts from the warming climate. This was based on the USDA's criteria for the ranking, which favoured warmer counties located by the sea or near mountains--both geographic features correlated with natural disasters driven by climat change.
+After reading an article on the subjectivity of the USDA's rankings of American counties by scenery and climate, the author hypothesised that counties ranked lower on this scale would experience less severe impacts from the warming climate. This was based on the USDA's criteria for the ranking, which favoured warmer counties located by the sea or near mountains--both geographic features correlated with natural disasters driven by climat change.
 To test this hypothesis, the author merged the dataset provided by the USDA with one gathered by the journalism nonprofit ProPublica. ProPublica, in coordination with the Rhodium Group, scored counties based on increases in the following metrics:
 
 1. Wet bulb temperature (mix of heat and humidity)
@@ -25,3 +25,15 @@ The hypothesis was not born out. There was a weak positive correlation, suggesti
 Regressor$linear_multivariate()
 ```
 The results somewhat bore this hypothesis out: more attractive counties were more likely to experience heat and fire-related damage, while less attractive counties were more at risk from wet bulb temperature increases (meaning higher and more dangerous humidity) and loss of crop yields. Thus, a different picture emerges than that which was originally hypothesised: less attractive counties, most of them in the center of the country, face different challenges from climate change--but not necessarily less severe ones.
+
+To quantify these differences, counties were mapped by colour, according to the highest source of risk. As hypothesised, more and less physically attractive regions faced different risks. The Midwest and inland Northeast, both of which scored poorly on the attractiveness scale, are more likely to be affected by increases in wet bulb temperatures and overall economic losses. The Rocky Mountains and Pacific coast, rated as attractive by the USDA, faced greater risk from fire damage and sea level increases. Note that Alaska, Hawaii and Puerto Rico were not surveyed; the risk shown for these areas is a visual artifact.
+
+```{r,echo=FALSE}
+mapping<-Climate.change.USDA.rankings::Risk_Isolator$new()
+mapping$leaflet_builder()
+```
+## Works cited
+1. USDA Natural Amenities Scale. Retrieved from https://www.ers.usda.gov/data-products/natural-amenities-scale.aspx
+2. New Climate Maps Show a Transformed United States. Retrieved from https://projects.propublica.org/climate-migration/
+3. Cartographic Boundary Files - Shapefile. Retrieved from https://www.census.gov/geographies/mapping-files/time-series/geo/carto-boundary-file.html
+
