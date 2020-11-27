@@ -2,7 +2,7 @@
 title: "R Notebook"
 output: html_notebook
 ---
-After reading an article on the subjectivity of the USDA's rankings of American counties by scenery and climate, the author hypothesised that counties ranked lower on this scale would experience less severe impacts from the warming climate. This was based on the USDA's criteria for the ranking, which favoured warmer counties located by the sea or near mountains--both geographic features correlated with natural disasters driven by climat change.
+After reading an article on the subjectivity of the USDA's rankings of American counties by natural amenities, such as attractive scenery and temperate climate, the author hypothesised that counties ranked lower on this scale would experience less severe impacts from the warming climate. This was based on the USDA's criteria for the ranking, which favoured warmer counties located by the sea or near mountains--both geographic features correlated with natural disasters driven by climate change.
 To test this hypothesis, the author merged the dataset provided by the USDA with one gathered by the journalism nonprofit ProPublica. ProPublica, in coordination with the Rhodium Group, scored counties based on increases in the following metrics:
 
 1. Wet bulb temperature (mix of heat and humidity)
@@ -12,21 +12,21 @@ To test this hypothesis, the author merged the dataset provided by the USDA with
 5. Very large fires
 6. Overall economic damage.
 
-The scores for these metrics were added to create an overall liveability metric, and a regression performed against the counties' subjective attractiveness.
+The scores for these metrics were added to create an overall liveability metric, and a regression performed against the counties' level of natural amenities.
 
 ```{r,echo=FALSE}
 Regressor<-Climate.change.USDA.rankings::Linear_Inferrer$new()
 Regressor$simple_linear()
 Regressor$linear_fitplot
 ```
-The hypothesis was not born out. There was a weak positive correlation, suggesting that more attractive counties were slightly more like to experience economic damage. This may be due to variance in the types of damage, so that less attractive counties had higher risk for features not correlated with attractiveness. To explore this possibility, the correlation of attractiveness with each of the variables making up overall climate risk, was calculated.
+The hypothesis was not born out. There was a weak positive correlation, suggesting that counties with more amenities were slightly more like to experience economic damage. This may be due to variance in the types of damage, so that counties with fewer amenities had higher risk for features not correlated with attractiveness. To explore this possibility, the correlation of amenity levels with each of the variables making up overall climate risk, was calculated.
 
 ```{r, echo=FALSE}
 Regressor$linear_multivariate()
 ```
-The results somewhat bore this hypothesis out: more attractive counties were more likely to experience heat and fire-related damage, while less attractive counties were more at risk from wet bulb temperature increases (meaning higher and more dangerous humidity) and loss of crop yields. Thus, a different picture emerges than that which was originally hypothesised: less attractive counties, most of them in the center of the country, face different challenges from climate change--but not necessarily less severe ones.
+The results somewhat bore this hypothesis out: counties with more amenities were more likely to experience heat and fire-related damage, while counties with fewer amenities were more at risk from wet bulb temperature increases (meaning higher and more dangerous humidity) and loss of crop yields. Thus, a different picture emerges than that which was originally hypothesised: less attractive counties, most of them in the center of the country, face different challenges from climate change--but not necessarily less severe ones.
 
-To quantify these differences, counties were mapped by colour, according to the highest source of risk. As hypothesised, more and less physically attractive regions faced different risks. The Midwest and inland Northeast, both of which scored poorly on the attractiveness scale, are more likely to be affected by increases in wet bulb temperatures and overall economic losses. The Rocky Mountains and Pacific coast, rated as attractive by the USDA, faced greater risk from fire damage and sea level increases. Note that Alaska, Hawaii and Puerto Rico were not surveyed; the risk shown for these areas is a visual artifact.
+To quantify these differences, counties were mapped by colour, according to the highest source of risk. As hypothesised, more and less amenity-rich regions faced different risks. The Midwest and inland Northeast, both of which scored poorly on the amenities scale, are more likely to be affected by increases in wet bulb temperatures and overall economic losses. The Rocky Mountains and Pacific coast, rated as having many amenities by the USDA, faced greater risk from fire damage and sea level increases. Note that Alaska, Hawaii and Puerto Rico were not surveyed; the risk shown for these areas is a visual artifact.
 
 ```{r,echo=FALSE}
 mapping<-Climate.change.USDA.rankings::Risk_Isolator$new()
