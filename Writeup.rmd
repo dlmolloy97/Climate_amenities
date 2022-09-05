@@ -1,5 +1,5 @@
 ---
-title: "R Notebook"
+title: "Summary"
 output: html_notebook
 ---
 After reading an article on the subjectivity of the USDA's rankings of American counties by natural amenities, such as attractive scenery and temperate climate, the author hypothesised that counties ranked lower on this scale would experience less severe impacts from the warming climate. This was based on the USDA's criteria for the ranking, which favoured warmer counties located by the sea or near mountains--both geographic features correlated with natural disasters driven by climate change.

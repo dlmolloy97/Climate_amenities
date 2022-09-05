@@ -18,9 +18,7 @@ Linear_Inferrer<-R6::R6Class(
       self$df_setter()
       library(tidyverse)
       self$l_model <- lm(Liveability~Attractiveness.USDA,data=self$df)
-      self$linear_fitplot<-ggplot2::ggplot(self$df, aes(x = Attractiveness.USDA, y = Liveability)) +
-        geom_point() +
-        geom_smooth(method = "lm", se = FALSE)
+      self$linear_fitplot<-ggplot2::ggplot(self$df, aes(x = self$df$Attractiveness.USDA, y = self$df$Liveability)) + geom_bin2d() + scale_fill_gradient(low = "blue", high = "red", na.value = NA) + geom_smooth(method = 'lm')
       summary(l_model)},
     linear_multivariate=function(){
       self$df_setter()
